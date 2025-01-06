@@ -1,0 +1,78 @@
+let players = ['x', 'o'];
+let activePlayer = 0;
+let curentPlayer = '';//текущая метка
+let board = [];//игровое поле
+let firstLabel;
+let secondLabel;
+let rowIndex; //строка события 'Click'
+let colIndex; //колонка события 'Click'
+let winner;//
+
+function startGame() {
+  board = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
+  ];
+  renderBoard(board);
+
+  activePlayer = 1; //первый ход
+
+  firstLabel = Math.round(Math.random()); //первый player
+  secondLabel = 1 - firstLabel; //второй player
+}
+
+click();
+
+function click(rowIndex, colIndex) {
+  
+  activePlayer++; //счетчик ходов
+  
+  if (activePlayer > 9) {
+    showDraw();
+  }//объявление о ничьей
+
+  function showDraw() {
+    let header = modalEl.getElementsByTagName('h2')[0];
+    header.textContent = `🍾 Ничья! 🍾`;
+    modalEl.classList.remove('hidden');
+    activePlayer = 0;
+  }
+
+  if (activePlayer % 2) {
+    curentPlayer = players[secondLabel];
+  } else {
+    curentPlayer = players[firstLabel];
+  }//чередование ходов
+
+  let boardCell = document.getElementById('board');
+  boardCell.addEventListener('click', function (event) {
+    let targetData = event.target.dataset;
+    rowIndex = Number(targetData.row);
+    colIndex = Number(targetData.col);
+  });//получение индексов кликнутой ячейки
+
+  board[rowIndex][colIndex] = curentPlayer;//отметка текущего игрока в кликнутой ячейке
+
+  renderBoard(board);//отображение текущего состояния игры
+
+  let btc = board.flat();
+  if (
+    (btc[0] == curentPlayer && btc[1] == curentPlayer && btc[2] == curentPlayer) ||
+    (btc[3] == curentPlayer && btc[4] == curentPlayer && btc[5] == curentPlayer) ||
+    (btc[6] == curentPlayer && btc[7] == curentPlayer && btc[8] == curentPlayer) ||
+    (btc[0] == curentPlayer && btc[3] == curentPlayer && btc[6] == curentPlayer) ||
+    (btc[1] == curentPlayer && btc[4] == curentPlayer && btc[7] == curentPlayer) ||
+    (btc[2] == curentPlayer && btc[5] == curentPlayer && btc[8] == curentPlayer) ||
+    (btc[0] == curentPlayer && btc[4] == curentPlayer && btc[8] == curentPlayer) ||
+    (btc[2] == curentPlayer && btc[4] == curentPlayer && btc[6] == curentPlayer)
+    ) {
+      if(activePlayer % 2) {
+        winner = 1;
+      } else {
+        winner = 0;
+    }
+    showWinner(winner);
+    activePlayer = 0;
+  }//проверка на выигрыш
+}

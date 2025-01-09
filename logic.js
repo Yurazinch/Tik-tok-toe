@@ -22,8 +22,6 @@ function startGame() {
   secondLabel = 1 - firstLabel; //второй player
 }
 
-click();
-
 function click(rowIndex, colIndex) {
   
   activePlayer++; //счетчик ходов
@@ -56,16 +54,20 @@ function click(rowIndex, colIndex) {
 
   renderBoard(board);//отображение текущего состояния игры
 
-  let btc = board.flat();
+  /*let btc = board.flat();*/
   if (
-    (btc[0] == curentPlayer && btc[1] == curentPlayer && btc[2] == curentPlayer) ||
+    /*(btc[0] == curentPlayer && btc[1] == curentPlayer && btc[2] == curentPlayer) ||
     (btc[3] == curentPlayer && btc[4] == curentPlayer && btc[5] == curentPlayer) ||
     (btc[6] == curentPlayer && btc[7] == curentPlayer && btc[8] == curentPlayer) ||
     (btc[0] == curentPlayer && btc[3] == curentPlayer && btc[6] == curentPlayer) ||
     (btc[1] == curentPlayer && btc[4] == curentPlayer && btc[7] == curentPlayer) ||
     (btc[2] == curentPlayer && btc[5] == curentPlayer && btc[8] == curentPlayer) ||
     (btc[0] == curentPlayer && btc[4] == curentPlayer && btc[8] == curentPlayer) ||
-    (btc[2] == curentPlayer && btc[4] == curentPlayer && btc[6] == curentPlayer)
+    (btc[2] == curentPlayer && btc[4] == curentPlayer && btc[6] == curentPlayer)*/
+    (board[rowIndex][0] == curentPlayer && board[rowIndex][1] == curentPlayer && board[rowIndex][2] == curentPlayer) ||
+    (board[0][colIndex] == curentPlayer && board[1][colIndex] == curentPlayer && board[2][colIndex] == curentPlayer) ||
+    (board[0][0] == curentPlayer && board[1][1] == curentPlayer && board[2][2] == curentPlayer) ||
+    (board[0][2] == curentPlayer && board[1][1] == curentPlayer && board[2][0] == curentPlayer)
     ) {
       if(activePlayer % 2) {
         winner = 1;

@@ -6,7 +6,7 @@ let firstLabel;
 let secondLabel;
 let rowIndex; //строка события 'Click'
 let colIndex; //колонка события 'Click'
-let winner;//
+let winner;// победитель
 
 function startGame() {
   board = [

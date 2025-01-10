@@ -1,7 +1,11 @@
 * {
     box-sizing: border-box;
+    width: 100%;
   }
+
   .panel {
+    max-width: 450px;
+    margin: 0 auto;
     text-align: center;
   }
   
@@ -75,3 +79,15 @@
     display: none;
   }
   
+  @media(orientation: portrait) {
+
+    #board {
+      height: 700px;
+      width: 700px;
+    }
+
+    #modal__window {
+      top: 750px;
+      width: 500px;
+    }
+  }  
